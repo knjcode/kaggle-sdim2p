@@ -1,0 +1,42 @@
+save_dir: eval02_large
+prefix: eva02_large_clsonly_8data_noaug_input448_bs16_lr1e-6_1e-7_wd5e-2_sam_madgrad_wawrmup0_3epoch
+
+ckpt_path: models/eval02_large/eva02_large_clsonly_3data_input448_bs32_lr1e-4_1e-6_wd5e-2_madgrad_wawrmup1_10epoch_fold5_best_cossim.pth
+
+train_fold: '5,9'
+dataset_name: cc3m_grouping,cc3m_grouping_part2,lexica_grouping,diffusiondb_grouping,diffusiondb_large_grouping,mscoco_grouping
+
+drop_duplicates: true
+task_type: image_embedding
+
+backbone_freeze_epochs: 0
+set_grad_checkpointing: false
+
+model_name: TimmViTModel
+backbone_name: eva02_large_patch14_448.mim_m38m_ft_in22k
+no_fc_bias: true
+h_patch: 32
+w_patch: 32
+
+with_cls: true
+cls_mode: cls_only
+pooling: nop
+
+train_trans_mode: justresize
+valid_trans_mode: justresize
+
+input_width: 448
+input_height: 448
+
+train_bs: 16
+valid_bs: 16
+
+sam: true
+optimizer: madgrad
+lr: 1e-6
+min_lr: 1e-7
+weight_decay: 5e-2
+
+epochs: 3
+warmup_epochs: 0
+

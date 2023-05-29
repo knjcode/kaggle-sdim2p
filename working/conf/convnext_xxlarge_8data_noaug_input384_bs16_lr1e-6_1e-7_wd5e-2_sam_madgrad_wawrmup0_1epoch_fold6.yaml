@@ -1,0 +1,38 @@
+save_dir: convnext_xxlarge
+prefix: convnext_xxlarge_8data_noaug_input384_bs16_lr1e-6_1e-7_wd5e-2_sam_madgrad_wawrmup0_1epoch
+
+seed: 1071
+ckpt_path: models/convnext_xxlarge/convnext_xxlarge_8data_noaug_input384_bs16_lr1e-6_1e-7_wd5e-2_sam_madgrad_wawrmup0_3epoch_fold6_best_cossim.pth
+
+train_fold: '6'
+dataset_name: cc3m_grouping,cc3m_grouping_part2,lexica_grouping,diffusiondb_grouping,diffusiondb_large_grouping,mscoco_grouping
+
+drop_duplicates: true
+task_type: image_embedding
+
+backbone_freeze_epochs: 0
+set_grad_checkpointing: true
+
+model_name: ViTHeadlessModel
+backbone_name: convnext_xxlarge
+backbone_pretrained: laion2b_s34b_b82k_augreg_rewind
+no_fc_bias: true
+
+train_trans_mode: justresize
+valid_trans_mode: justresize
+
+input_width: 384
+input_height: 384
+
+train_bs: 16
+valid_bs: 16
+
+sam: true
+optimizer: madgrad
+lr: 1e-6
+min_lr: 1e-7
+weight_decay: 5e-2
+
+epochs: 1
+warmup_epochs: 0
+

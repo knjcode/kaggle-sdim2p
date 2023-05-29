@@ -1,0 +1,38 @@
+save_dir: vit_large
+prefix: vit_large_3data_input336_bs32_lr1e-4_1e-6_wd5e-2_madgrad_wawrmup3_15epoch
+
+train_fold: '0,3,4,8'
+dataset_name: cc3m_grouping,lexica_grouping,diffusiondb_grouping
+
+drop_duplicates: true
+task_type: image_embedding
+
+rgb_mean: '0.5,0.5,0.5'
+rgb_std: '0.5,0.5,0.5'
+
+backbone_freeze_epochs: 3
+set_grad_checkpointing: false
+
+model_name: ViTHeadlessModel
+backbone_name: ViT-L-14
+backbone_pretrained: laion2b_s32b_b82k
+no_fc_bias: true
+
+train_trans_mode: aug_v1
+valid_trans_mode: justresize
+
+input_width: 336
+input_height: 336
+
+train_bs: 32
+valid_bs: 32
+
+optimizer: madgrad
+warmup_lr_init: 1e-2
+lr: 1e-4
+min_lr: 1e-6
+weight_decay: 5e-2
+
+epochs: 15
+warmup_epochs: 3
+
